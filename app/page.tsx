@@ -69,7 +69,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
-              <h1 className="text-5xl lg:text-6xl font-[var(--font-playfair)] font-normal text-gray-900 leading-tight">
+              <h1 className="text-5xl lg:text-6xl font-[var(--font-figtree)] font-semibold text-gray-900 leading-tight">
                 Where brand clarity meets customer acquisition.
               </h1>
               <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
@@ -115,7 +115,7 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white p-8 rounded-lg border border-gray-100 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-[var(--font-playfair)] text-gray-900 mb-3">
+              <h3 className="text-xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-3">
                 Customer Acquisition Strategy
               </h3>
               <p className="text-gray-600 leading-relaxed">
@@ -123,7 +123,7 @@ export default function Home() {
               </p>
             </div>
             <div className="bg-white p-8 rounded-lg border border-gray-100 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-[var(--font-playfair)] text-gray-900 mb-3">
+              <h3 className="text-xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-3">
                 Paid Media Strategy
               </h3>
               <p className="text-gray-600 leading-relaxed">
@@ -131,7 +131,7 @@ export default function Home() {
               </p>
             </div>
             <div className="bg-white p-8 rounded-lg border border-gray-100 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-[var(--font-playfair)] text-gray-900 mb-3">
+              <h3 className="text-xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-3">
                 Performance Marketing
               </h3>
               <p className="text-gray-600 leading-relaxed">
@@ -139,7 +139,7 @@ export default function Home() {
               </p>
             </div>
             <div className="bg-white p-8 rounded-lg border border-gray-100 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-[var(--font-playfair)] text-gray-900 mb-3">
+              <h3 className="text-xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-3">
                 Brand Strategy
               </h3>
               <p className="text-gray-600 leading-relaxed">
@@ -147,7 +147,7 @@ export default function Home() {
               </p>
             </div>
             <div className="bg-white p-8 rounded-lg border border-gray-100 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-[var(--font-playfair)] text-gray-900 mb-3">
+              <h3 className="text-xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-3">
                 Creative Direction
               </h3>
               <p className="text-gray-600 leading-relaxed">
@@ -173,7 +173,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-50"></div>
             </div>
             <div className="space-y-6">
-              <h2 className="text-4xl font-[var(--font-playfair)] text-gray-900">
+              <h2 className="text-4xl font-[var(--font-figtree)] font-semibold text-gray-900">
                 About
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">
@@ -187,7 +187,7 @@ export default function Home() {
       {/* Contact Section */}
       <section id="contact" className="w-screen py-24 px-6 lg:px-8 bg-gray-50">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-4xl font-[var(--font-playfair)] text-gray-900 mb-12 text-center">
+          <h2 className="text-4xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-12 text-center">
             Get in Touch
           </h2>
           
@@ -286,19 +286,143 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="w-screen bg-gray-900 text-white py-12 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="text-xl font-semibold">
-              Fifth Quarter Cards
+      <footer className="w-screen bg-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            {/* Brand Column */}
+            <div className="space-y-4">
+              <div className="text-2xl font-semibold mb-4">
+                Fifth Quarter Cards
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Growth marketing partner combining brand thinking with customer acquisition and paid media execution.
+              </p>
             </div>
-            <div className="text-sm text-gray-400">
-              <a href="mailto:fifthquartercards@gmail.com" className="hover:text-white transition-colors">
-                fifthquartercards@gmail.com
-              </a>
+
+            {/* Navigation Column */}
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-300 mb-4">
+                Navigation
+              </h3>
+              <ul className="space-y-3">
+                <li>
+                  <button
+                    onClick={() => scrollToSection("capabilities")}
+                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                  >
+                    Capabilities
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollToSection("about")}
+                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                  >
+                    About
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollToSection("contact")}
+                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                  >
+                    Contact
+                  </button>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    Case Studies
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    Resources
+                  </a>
+                </li>
+              </ul>
             </div>
-            <div className="text-sm text-gray-400">
-              © {new Date().getFullYear()} Fifth Quarter Cards, LLC. All rights reserved.
+
+            {/* Services Column */}
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-300 mb-4">
+                Services
+              </h3>
+              <ul className="space-y-3">
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    Customer Acquisition
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    Paid Media Strategy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    Performance Marketing
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    Brand Strategy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    Creative Direction
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contact Column */}
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-300 mb-4">
+                Contact
+              </h3>
+              <ul className="space-y-3">
+                <li>
+                  <a
+                    href="mailto:fifthquartercards@gmail.com"
+                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                  >
+                    fifthquartercards@gmail.com
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    Twitter
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    Newsletter
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-gray-800 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <div className="text-sm text-gray-400">
+                © {new Date().getFullYear()} Fifth Quarter Cards, LLC. All rights reserved.
+              </div>
+              <div className="flex gap-6 text-sm text-gray-400">
+                <a href="#" className="hover:text-white transition-colors">
+                  Privacy Policy
+                </a>
+                <a href="#" className="hover:text-white transition-colors">
+                  Terms of Service
+                </a>
+              </div>
             </div>
           </div>
         </div>
