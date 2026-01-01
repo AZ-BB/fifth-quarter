@@ -1,432 +1,179 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
+import Navigation from "./components/Navigation";
+import Hero from "./components/Hero";
+import ContactForm from "./components/ContactForm";
+import Footer from "./components/Footer";
+import ScrollFadeIn from "./components/ScrollFadeIn";
 
 export default function Home() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    message: "",
-    consent: false,
-  });
-  const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">("idle");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormStatus("idle");
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setFormStatus("success");
-      setFormData({ name: "", email: "", company: "", message: "", consent: false });
-    }, 500);
-  };
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="text-xl font-semibold text-[#2d5a5a]">
-              Fifth Quarter Cards
-            </div>
-            <div className="flex items-center gap-8">
-              <button
-                onClick={() => scrollToSection("capabilities")}
-                className="text-sm text-gray-700 hover:text-[#2d5a5a] transition-colors"
-              >
-                Capabilities
-              </button>
-              <button
-                onClick={() => scrollToSection("about")}
-                className="text-sm text-gray-700 hover:text-[#2d5a5a] transition-colors"
-              >
-                About
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="px-4 py-2 text-sm font-medium text-[#2d5a5a] border border-[#2d5a5a] rounded hover:bg-[#2d5a5a] hover:text-white transition-colors"
-              >
-                Let&apos;s Talk
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
-      {/* Hero Section */}
-      <section className="w-screen pt-32 pb-20 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <h1 className="text-5xl lg:text-6xl font-[var(--font-figtree)] font-semibold text-gray-900 leading-tight">
-                Where brand clarity meets customer acquisition.
-              </h1>
-              <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
-                I help growth minded teams scale acquisition through paid media and performance optimization that is grounded in brand strategy with clear messaging, compelling creative that converts.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => scrollToSection("contact")}
-                  className="px-8 py-4 bg-[#2d5a5a] text-white font-medium rounded hover:bg-[#3d7a7a] transition-colors"
-                >
-                  Let&apos;s Talk
-                </button>
-                <button
-                  onClick={() => scrollToSection("capabilities")}
-                  className="px-8 py-4 border border-gray-300 text-gray-700 font-medium rounded hover:bg-gray-50 transition-colors"
-                >
-                  View Capabilities
-                </button>
-              </div>
-            </div>
-            <div className="relative h-[500px] lg:h-[600px] rounded-lg overflow-hidden">
-              <Image
-                src="/1.jpg"
-                alt="Marketing strategy"
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent opacity-60"></div>
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-40"></div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero />
 
       {/* Capabilities Section */}
-      <section id="capabilities" className="w-screen py-24 px-6 lg:px-8 bg-gray-50">
+      <section id="capabilities" className="w-screen py-16 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#489c9c28]">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-sm uppercase tracking-wider text-gray-500 mb-4">
-              Capabilities designed to connect brand positioning to in-market performance
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white p-8 rounded-lg border border-gray-100 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-3">
-                Customer Acquisition Strategy
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Build scalable acquisition programs across channels with a clear testing and measurement cadence.
+          <ScrollFadeIn>
+            <div className="text-center mb-10 sm:mb-12 md:mb-16">
+              <p className="text-sm sm:text-sm uppercase tracking-wider text-gray-500 mb-4 px-4">
+                Capabilities designed to connect brand positioning to in-market performance
               </p>
             </div>
-            <div className="bg-white p-8 rounded-lg border border-gray-100 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-3">
-                Paid Media Strategy
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Strategy across the paid ecosystem, from structure to day-to-day optimization.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-lg border border-gray-100 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-3">
-                Performance Marketing
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Improve CAC, conversion rate, and ROI through disciplined measurement, experimentation, and iteration.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-lg border border-gray-100 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-3">
-                Brand Strategy
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Positioning and messaging that sharpen the story and make performance marketing work harder.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-lg border border-gray-100 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-3">
-                Creative Direction
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Translate strategy into ads and landing experiences that look on-brand and convert.
-              </p>
+          </ScrollFadeIn>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
+            <ScrollFadeIn delay={0} className="w-full">
+              <div className="bg-white p-5 sm:p-8 rounded-lg border border-gray-100 flex flex-col h-[150px] md:h-full w-full">
+                <h3 className="text-xl sm:text-xl font-playfairDisplay font-semibold text-gray-900 mb-2 sm:mb-3">
+                  Brand Strategy
+                </h3>
+                <p className="text-base sm:text-base text-gray-600 leading-relaxed grow">
+                  Positioning and messaging that sharpen the story and make performance marketing work harder.
+                </p>
+              </div>
+            </ScrollFadeIn>
+            <ScrollFadeIn delay={100} className="w-full">
+              <div className="bg-white p-5 sm:p-8 rounded-lg border border-gray-100 flex flex-col h-[150px] md:h-full w-full">
+                <h3 className="text-xl sm:text-xl font-playfairDisplay font-semibold text-gray-900 mb-2 sm:mb-3">
+                  Paid Media Strategy
+                </h3>
+                <p className="text-base sm:text-base text-gray-600 leading-relaxed grow">
+                  Strategy across the paid ecosystem, from structure to day-to-day optimization.
+                </p>
+              </div>
+            </ScrollFadeIn>
+            <ScrollFadeIn delay={200} className="w-full">
+              <div className="bg-white p-5 sm:p-8 rounded-lg border border-gray-100 flex flex-col h-[150px] md:h-full w-full">
+                <h3 className="text-xl sm:text-xl font-playfairDisplay font-semibold text-gray-900 mb-2 sm:mb-3">
+                  Performance Marketing
+                </h3>
+                <p className="text-base sm:text-base text-gray-600 leading-relaxed grow">
+                  Improve CAC, conversion rate, and ROI through disciplined measurement, experimentation, and iteration.
+                </p>
+              </div>
+            </ScrollFadeIn>
+            <div className="lg:col-span-3 flex flex-col md:flex-row lg:justify-center gap-6 sm:gap-6">
+              <ScrollFadeIn delay={300}>
+                <div className="bg-white p-5 sm:p-8 rounded-lg border border-gray-100 flex flex-col h-[150px] md:h-full">
+                  <h3 className="text-xl sm:text-xl font-playfairDisplay font-semibold text-gray-900 mb-2 sm:mb-3">
+                    Customer Acquisition Strategy
+                  </h3>
+                  <p className="text-base sm:text-base text-gray-600 leading-relaxed grow">
+                    Build scalable acquisition programs across channels with a clear testing and measurement cadence.
+                  </p>
+                </div>
+              </ScrollFadeIn>
+              <ScrollFadeIn delay={400}>
+                <div className="bg-white p-5 sm:p-8 rounded-lg border border-gray-100 flex flex-col h-[150px] md:h-full">
+                  <h3 className="text-xl sm:text-xl font-playfairDisplay font-semibold text-gray-900 mb-2 sm:mb-3">
+                    Creative Direction
+                  </h3>
+                  <p className="text-base sm:text-base text-gray-600 leading-relaxed grow">
+                    Translate strategy into ads and landing experiences that look on-brand and convert.
+                  </p>
+                </div>
+              </ScrollFadeIn>
             </div>
           </div>
         </div>
       </section>
 
+
       {/* About Section */}
-      <section id="about" className="w-screen py-24 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="relative h-[400px] lg:h-[500px] rounded-lg overflow-hidden">
+      <section id="about" className="w-screen">
+        <div className="w-full">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="relative h-64 sm:h-80 md:h-96 lg:h-full w-full overflow-hidden lg:min-h-[500px] order-2 lg:order-1">
               <Image
                 src="/2.jpg"
                 alt="About"
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-l from-white via-transparent to-transparent opacity-70"></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-50"></div>
+              <div className="absolute inset-0 bg-gradient-to-l from-[#2d5a5a]  via-transparent to-transparent opacity-70"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-transparent opacity-50"></div>
             </div>
-            <div className="space-y-6">
-              <h2 className="text-4xl font-[var(--font-figtree)] font-semibold text-gray-900">
-                About
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                Marketing consultant combining brand experience with customer acquisition and paid media execution. Focused on delivering measurable results that result in both short and long-term business growth.
-              </p>
-            </div>
+            <ScrollFadeIn delay={400}>
+              <div className="space-y-4 sm:space-y-6 py-12 sm:py-24 md:py-32 lg:py-52 px-4 sm:px-6 md:px-12 lg:pl-24 order-1 lg:order-2">
+                <h2 className="text-3xl sm:text-3xl md:text-4xl font-[var(--font-figtree)] font-semibold text-gray-900">
+                  About
+                </h2>
+                <p className="text-lg sm:text-lg text-gray-600 leading-relaxed">
+                  Marketing consultant combining brand experience with customer acquisition and paid media execution. Focused on delivering measurable results that result in both short and long-term business growth.
+                </p>
+              </div>
+            </ScrollFadeIn>
           </div>
         </div>
       </section>
+
+      {/* Approach Section */}
+      <section id="approach" className="w-screen py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-24 lg:px-8 bg-white border-t border-gray-400/10">
+        <div className="w-full mx-auto">
+          <ScrollFadeIn>
+            <div className="text-start mb-8 sm:mb-12 md:mb-16">
+              <h2 className="text-3xl sm:text-3xl md:text-4xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-4 sm:mb-6">
+                Our Approach
+              </h2>
+              <p className="text-sm sm:text-sm uppercase tracking-wider text-gray-500">
+                A strategic framework for sustainable growth
+              </p>
+            </div>
+          </ScrollFadeIn>
+
+          <ScrollFadeIn delay={100}>
+            <div className="space-y-6 sm:space-y-8 text-gray-700 leading-relaxed">
+              <p className="text-lg sm:text-lg">
+                Every successful marketing strategy begins with understanding your brand's unique position in the market. We start by diving deep into your business objectives, target audience, and competitive landscape to build a comprehensive foundation for growth.
+              </p>
+
+              <p className="text-lg sm:text-lg">
+                Our methodology combines rigorous data analysis with creative thinking, ensuring that every campaign we develop is both strategically sound and creatively compelling. We believe that the most effective marketing doesn't just drive immediate conversions—it builds lasting brand equity that compounds over time.
+              </p>
+
+              <p className="text-lg sm:text-lg">
+                Through continuous testing, measurement, and optimization, we refine our approach to deliver increasingly better results. This iterative process allows us to identify what resonates most with your audience, optimize spend allocation, and scale what works while eliminating what doesn't.
+              </p>
+
+              <p className="text-lg sm:text-lg">
+                Whether you're launching a new product, entering a new market, or looking to accelerate growth in your existing channels, our approach is tailored to your specific needs. We work collaboratively with your team to ensure alignment, transparency, and shared ownership of results.
+              </p>
+            </div>
+          </ScrollFadeIn>
+        </div>
+      </section>
+
 
       {/* Contact Section */}
-      <section id="contact" className="w-screen py-24 px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-4xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-12 text-center">
-            Get in Touch
-          </h2>
-          
-          {formStatus === "success" ? (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
-              <p className="text-green-800 font-medium">
-                Thanks — I&apos;ll reply within 24 hours.
+      <section id="contact" className="w-screen py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <ScrollFadeIn>
+            <h2 className="text-3xl sm:text-3xl md:text-4xl font-[var(--font-figtree)] font-semibold text-gray-900 mb-8 sm:mb-12 text-center">
+              Get in Touch
+            </h2>
+          </ScrollFadeIn>
+
+          <ScrollFadeIn delay={100}>
+            <ContactForm />
+          </ScrollFadeIn>
+
+          <ScrollFadeIn delay={200}>
+            <div className="mt-8 sm:mt-12 pt-8 sm:pt-12 border-t border-gray-200 text-center sm:text-start">
+              <p className="text-base sm:text-base text-gray-600 mb-2">
+                <span>
+                  Contact us at: <br />
+                </span>
+                <a href="mailto:fifthquartercards@gmail.com" className="text-[#2d5a5a] hover:underline break-all">
+                  fifthquartercards@gmail.com
+                </a>
               </p>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2d5a5a] focus:border-transparent outline-none"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2d5a5a] focus:border-transparent outline-none"
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                  Company *
-                </label>
-                <input
-                  type="text"
-                  id="company"
-                  required
-                  value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2d5a5a] focus:border-transparent outline-none"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Message *
-                </label>
-                <textarea
-                  id="message"
-                  required
-                  rows={6}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2d5a5a] focus:border-transparent outline-none resize-none"
-                />
-              </div>
-              <div className="flex items-start">
-                <input
-                  type="checkbox"
-                  id="consent"
-                  required
-                  checked={formData.consent}
-                  onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-                  className="mt-1 mr-3 h-4 w-4 text-[#2d5a5a] focus:ring-[#2d5a5a] border-gray-300 rounded"
-                />
-                <label htmlFor="consent" className="text-sm text-gray-600">
-                  I consent to being contacted by Fifth Quarter Cards *
-                </label>
-              </div>
-              <button
-                type="submit"
-                className="w-full px-8 py-4 bg-[#2d5a5a] text-white font-medium rounded hover:bg-[#3d7a7a] transition-colors"
-              >
-                Send Message
-              </button>
-            </form>
-          )}
-
-          <div className="mt-12 pt-12 border-t border-gray-200 text-center">
-            <p className="text-gray-600 mb-2">
-              <a href="mailto:fifthquartercards@gmail.com" className="text-[#2d5a5a] hover:underline">
-                fifthquartercards@gmail.com
-              </a>
-            </p>
-          </div>
+          </ScrollFadeIn>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="w-screen bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-            {/* Brand Column */}
-            <div className="space-y-4">
-              <div className="text-2xl font-semibold mb-4">
-                Fifth Quarter Cards
-              </div>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Growth marketing partner combining brand thinking with customer acquisition and paid media execution.
-              </p>
-            </div>
-
-            {/* Navigation Column */}
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-300 mb-4">
-                Navigation
-              </h3>
-              <ul className="space-y-3">
-                <li>
-                  <button
-                    onClick={() => scrollToSection("capabilities")}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
-                  >
-                    Capabilities
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection("about")}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
-                  >
-                    About
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection("contact")}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
-                  >
-                    Contact
-                  </button>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                    Case Studies
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                    Resources
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Services Column */}
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-300 mb-4">
-                Services
-              </h3>
-              <ul className="space-y-3">
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                    Customer Acquisition
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                    Paid Media Strategy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                    Performance Marketing
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                    Brand Strategy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                    Creative Direction
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Contact Column */}
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-300 mb-4">
-                Contact
-              </h3>
-              <ul className="space-y-3">
-                <li>
-                  <a
-                    href="mailto:fifthquartercards@gmail.com"
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
-                  >
-                    fifthquartercards@gmail.com
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                    LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                    Twitter
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                    Newsletter
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="border-t border-gray-800 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="text-sm text-gray-400">
-                © {new Date().getFullYear()} Fifth Quarter Cards, LLC. All rights reserved.
-              </div>
-              <div className="flex gap-6 text-sm text-gray-400">
-                <a href="#" className="hover:text-white transition-colors">
-                  Privacy Policy
-                </a>
-                <a href="#" className="hover:text-white transition-colors">
-                  Terms of Service
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
