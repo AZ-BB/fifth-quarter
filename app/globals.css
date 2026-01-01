@@ -5,6 +5,8 @@
   --foreground: #171717;
   --accent: #2d5a5a;
   --accent-light: #3d7a7a;
+  --font-figtree: 'Figtree', sans-serif;
+  --font-playfairDisplay: 'Playfair Display', serif;
 }
 
 @theme inline {
@@ -14,6 +16,8 @@
   --color-accent-light: var(--accent-light);
   --font-sans: var(--font-figtree);
   --font-heading: var(--font-figtree);
+  --font-figtree: var(--font-figtree);
+  --font-playfairDisplay: var(--font-playfair-display);
 }
 
 html {
