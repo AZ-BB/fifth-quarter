@@ -10,7 +10,14 @@ const scrollToSection = (id: string) => {
   }
 };
 
-export default function Hero() {
+interface HeroProps {
+  title: string;
+  subtitle: string;
+  button1: string;
+  button2: string;
+}
+
+export default function Hero({ title, subtitle, button1, button2 }: HeroProps) {
   return (
     <section className="w-screen pt-16 md:pt-0">
       <div className="w-full">
@@ -18,12 +25,12 @@ export default function Hero() {
           <div className="space-y-6 sm:space-y-8 py-12 sm:py-24 md:py-32 lg:py-56 px-4 sm:px-6 md:px-12 lg:pl-24">
             <ScrollFadeIn delay={0} className="duration-1000">
               <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-playfairDisplay font-semibold text-gray-900 leading-tight">
-                Where brand clarity meets customer acquisition.
+                {title}
               </h1>
             </ScrollFadeIn>
             <ScrollFadeIn delay={300} className="duration-1000">
               <p className="text-lg sm:text-lg text-gray-600 font-medium leading-relaxed max-w-xl">
-                I help growth minded teams scale acquisition through paid media and performance optimization that is grounded in brand strategy with clear messaging, compelling creative that converts.
+                {subtitle}
               </p>
             </ScrollFadeIn>
             <ScrollFadeIn delay={600} className="duration-1000">
@@ -32,13 +39,13 @@ export default function Hero() {
                   onClick={() => scrollToSection("contact")}
                   className="px-6 sm:px-8 py-3 sm:py-4 bg-[#2d5a5a] text-white text-base sm:text-base font-medium hover:bg-[#366363] transition-colors cursor-pointer"
                 >
-                  Let&apos;s Talk
+                  {button1}
                 </button>
                 <button
                   onClick={() => scrollToSection("capabilities")}
                   className="px-6 sm:px-8 py-3 sm:py-4 border border-gray-500 cursor-pointer text-base sm:text-base text-gray-700 font-medium hover:bg-[#3d7a7a]/10 transition-colors"
                 >
-                  View Capabilities
+                  {button2}
                 </button>
               </div>
             </ScrollFadeIn>
