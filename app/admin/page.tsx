@@ -3,10 +3,6 @@
 import { useState, useEffect } from "react";
 import defaultContent from "./content.json";
 
-// Static credentials
-const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "admin123";
-
 // Transform JSON structure to flat formData structure
 function transformContentToFormData(content: typeof defaultContent) {
   return {
@@ -528,41 +524,87 @@ export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
-  // Check if user is already logged in
+  // Check if user is already logged in via API
   useEffect(() => {
-    const authStatus = localStorage.getItem("adminAuthenticated");
-    if (authStatus === "true") {
-      setIsAuthenticated(true);
-    }
+    const checkAuth = async () => {
+      try {
+        const response = await fetch("/api/auth/check");
+        if (response.ok) {
+          const data = await response.json();
+          setIsAuthenticated(data.authenticated);
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error("Error checking auth:", error);
+        setIsAuthenticated(false);
+      } finally {
+        setIsCheckingAuth(false);
+      }
+    };
+
+    checkAuth();
   }, []);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setIsLoading(true);
 
-    // Simulate a small delay for better UX
-    setTimeout(() => {
-      if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setIsAuthenticated(true);
-        localStorage.setItem("adminAuthenticated", "true");
         setUsername("");
         setPassword("");
       } else {
-        setError("Invalid username or password");
+        setError(data.error || "Invalid username or password");
       }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("Failed to login. Please try again.");
+    } finally {
       setIsLoading(false);
-    }, 300);
+    }
   };
 
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem("adminAuthenticated");
-    setUsername("");
-    setPassword("");
-    setError("");
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", {
+        method: "POST",
+      });
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      setIsAuthenticated(false);
+      setUsername("");
+      setPassword("");
+      setError("");
+    }
   };
+
+  // Show loading state while checking authentication
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2d5a5a] mx-auto"></div>
+          <p className="mt-4 text-gray-600">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (isAuthenticated) {
     return <CMSDashboard onLogout={handleLogout} />;
@@ -652,7 +694,7 @@ export default function AdminPage() {
 
           <div className="text-center">
             <p className="text-xs text-gray-500">
-              Default credentials: admin / admin123
+              Enter your admin credentials to continue
             </p>
           </div>
         </form>
