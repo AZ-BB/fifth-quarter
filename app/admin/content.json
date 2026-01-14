@@ -19,14 +19,6 @@
           {
               "title": "Customer Acquisition",
               "description": "Paid media strategy, measurement, and ongoing optimization to improve CAC, conversion\nrate, and ROI."
-          },
-          {
-              "title": "Customer Acquisition Strategy",
-              "description": "Build scalable acquisition programs across channels with a clear testing and measurement cadence."
-          },
-          {
-              "title": "Creative Direction",
-              "description": "Translate strategy into ads and landing experiences that look on-brand and convert."
           }
       ]
   },
@@ -46,7 +38,6 @@
   },
   "contact": {
       "title": "Get in Touch",
-      "email": "fifthquartercards@gmail.com",
-      "linkedinUrl": ""
+      "email": "fifthquartercards@gmail.com"
   }
 }
