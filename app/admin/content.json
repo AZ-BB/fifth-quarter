@@ -1,52 +1,44 @@
 {
   "hero": {
-    "title": "Where brand clarity meets customer acquisition.",
-    "subtitle": "I help growth minded teams scale acquisition through paid media and performance optimization that is grounded in brand strategy with clear messaging, compelling creative that converts.",
-    "button1": "Let's Talk",
-    "button2": "View Capabilities"
+      "title": "Where brand clarity meets customer acquisition.",
+      "subtitle": "We help growth-minded teams scale\ncustomer acquisition through paid media and\nperformance optimization, grounded in\nbrand strategy, clear messaging, and creative\nthat converts.",
+      "button1": "Let's Talk",
+      "button2": "View Capabilities"
   },
   "capabilities": {
-    "subtitle": "Capabilities designed to connect brand positioning to in-market performance",
-    "items": [
-      {
-        "title": "Brand Strategy",
-        "description": "Positioning and messaging that sharpen the story and make performance marketing work harder."
-      },
-      {
-        "title": "Paid Media Strategy",
-        "description": "Strategy across the paid ecosystem, from structure to day-to-day optimization."
-      },
-      {
-        "title": "Performance Marketing",
-        "description": "Improve CAC, conversion rate, and ROI through disciplined measurement, experimentation, and iteration."
-      },
-      {
-        "title": "Customer Acquisition Strategy",
-        "description": "Build scalable acquisition programs across channels with a clear testing and measurement cadence."
-      },
-      {
-        "title": "Creative Direction",
-        "description": "Translate strategy into ads and landing experiences that look on-brand and convert."
-      }
-    ]
+      "subtitle": "Capabilities designed to connect brand positioning to in-market performance.",
+      "items": [
+          {
+              "title": "Brand Strategy",
+              "description": "Positioning and messaging that sharpen the\nstory and make acquisition more effective."
+          },
+          {
+              "title": "Creative Strategy",
+              "description": "Translate strategy into ads and landing\nexperiences that stay on-brand and convert."
+          },
+          {
+              "title": "Customer Acquisition",
+              "description": "Paid media strategy, measurement, and ongoing optimization to improve CAC, conversion\nrate, and ROI."
+          }
+      ]
   },
   "about": {
-    "title": "About",
-    "description": "Marketing consultant combining brand experience with customer acquisition and paid media execution. Focused on delivering measurable results that result in both short and long-term business growth."
+      "title": "About",
+      "description": "We are a marketing consultancy combining\nbrand experience with customer acquisition\nand paid media execution. We focus on\nmeasurable outcomes that support both\nshort- and long-term business growth."
   },
   "approach": {
-    "title": "Our Approach",
-    "subtitle": "A strategic framework for sustainable growth",
-    "paragraphs": [
-      "Every successful marketing strategy begins with understanding your brand's unique position in the market. We start by diving deep into your business objectives, target audience, and competitive landscape to build a comprehensive foundation for growth.",
-      "Our methodology combines rigorous data analysis with creative thinking, ensuring that every campaign we develop is both strategically sound and creatively compelling. We believe that the most effective marketing doesn't just drive immediate conversions—it builds lasting brand equity that compounds over time.",
-      "Through continuous testing, measurement, and optimization, we refine our approach to deliver increasingly better results. This iterative process allows us to identify what resonates most with your audience, optimize spend allocation, and scale what works while eliminating what doesn't.",
-      "Whether you're launching a new product, entering a new market, or looking to accelerate growth in your existing channels, our approach is tailored to your specific needs. We work collaboratively with your team to ensure alignment, transparency, and shared ownership of results."
-    ]
+      "title": "Our Approach",
+      "subtitle": "A strategic framework for sustainable growth.",
+      "paragraphs": [
+          "Every successful marketing strategy begins\nwith understanding your brand’s position in\nthe market. We start by aligning on\nobjectives, target audience, and competitive\nlandscape to build a strong foundation for\ngrowth.",
+          "Our methodology combines data analysis\nwith creative thinking, ensuring that every\ncampaign is both strategically sound and\ncreatively compelling. We believe effective\nmarketing drives conversions while building\nbrand equity over time.",
+          "Through continuous testing, measurement,\nand optimization, we refine our approach\nover time. This process helps identify what\nresonates, improve spend allocation, and\nscale what works while removing what\ndoesn’t.",
+          "Whether you’re launching a product, entering\na new market, or accelerating existing\nchannels, our approach is tailored to your\nneeds. We work collaboratively with your\nteam to ensure alignment, transparency, and\nshared ownership of results."
+      ]
   },
   "contact": {
-    "title": "Get in Touch",
-    "email": "fifthquartercards@gmail.com"
+      "title": "Get in Touch",
+      "email": "fifthquartercards@gmail.com",
+      "linkedinUrl": "#"
   }
 }
-

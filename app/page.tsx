@@ -12,10 +12,11 @@ export const revalidate = 3600; // 1 hour in seconds
 export default async function Home() {
   // Fetch content from API with fallback to JSON
   const content = await fetchContent();
+  console.log(content);
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
-      <Navigation />
+      <Navigation capabilities={content.capabilities.items} />
 
       <Hero 
         title={content.hero.title}
@@ -34,8 +35,8 @@ export default async function Home() {
               </p>
             </div>
           </ScrollFadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
-            {content.capabilities.items.slice(0, 3).map((item, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {content.capabilities.items.map((item, index) => (
               <ScrollFadeIn key={index} delay={index * 100} className="w-full">
                 <div className="bg-white p-5 sm:p-8 rounded-lg border border-gray-100 flex flex-col h-[150px] md:h-full w-full">
                   <h3 className="text-xl sm:text-xl font-playfairDisplay font-semibold text-gray-900 mb-2 sm:mb-3">
@@ -47,20 +48,6 @@ export default async function Home() {
                 </div>
               </ScrollFadeIn>
             ))}
-            <div className="lg:col-span-3 flex flex-col md:flex-row lg:justify-center gap-6 sm:gap-6">
-              {content.capabilities.items.slice(3, 5).map((item, index) => (
-                <ScrollFadeIn key={index + 3} delay={(index + 3) * 100}>
-                  <div className="bg-white p-5 sm:p-8 rounded-lg border border-gray-100 flex flex-col h-[150px] md:h-full">
-                    <h3 className="text-xl sm:text-xl font-playfairDisplay font-semibold text-gray-900 mb-2 sm:mb-3">
-                      {item.title}
-                    </h3>
-                    <p className="text-base sm:text-base text-gray-600 leading-relaxed grow">
-                      {item.description}
-                    </p>
-                  </div>
-                </ScrollFadeIn>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -131,7 +118,7 @@ export default async function Home() {
           </ScrollFadeIn>
 
           <ScrollFadeIn delay={100}>
-            <ContactForm />
+            <ContactForm email={content.contact.email} />
           </ScrollFadeIn>
 
           <ScrollFadeIn delay={200}>
@@ -149,7 +136,10 @@ export default async function Home() {
         </div>
       </section>
 
-      <Footer />
+      <Footer 
+        capabilities={content.capabilities.items} 
+        linkedinUrl={content.contact.linkedinUrl}
+      />
     </div>
   );
 }

@@ -9,7 +9,16 @@ const scrollToSection = (id: string) => {
   }
 };
 
-export default function Navigation() {
+interface Capability {
+  title: string;
+  description: string;
+}
+
+interface NavigationProps {
+  capabilities: Capability[];
+}
+
+export default function Navigation({ capabilities }: NavigationProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -37,13 +46,10 @@ export default function Navigation() {
     }, 200); // 200ms delay before hiding
   };
 
-  const capabilitiesLinks = [
-    { label: "Brand Strategy", id: "capabilities" },
-    { label: "Paid Media Strategy", id: "capabilities" },
-    { label: "Performance Marketing", id: "capabilities" },
-    { label: "Customer Acquisition Strategy", id: "capabilities" },
-    { label: "Creative Direction", id: "capabilities" },
-  ];
+  const capabilitiesLinks = capabilities.map((capability) => ({
+    label: capability.title,
+    id: "capabilities",
+  }));
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-[#2d5a5a]/50">
