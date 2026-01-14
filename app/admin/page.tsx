@@ -3,27 +3,48 @@
 import { useState, useEffect } from "react";
 import defaultContent from "./content.json";
 
-// Transform JSON structure to flat formData structure
-function transformContentToFormData(content: typeof defaultContent) {
-  return {
+// Form data structure with dynamic capabilities
+interface FormData {
+  // Hero Section
+  heroTitle: string;
+  heroSubtitle: string;
+  heroButton1: string;
+  heroButton2: string;
+  
+  // Capabilities Section
+  capabilitiesSubtitle: string;
+  capabilities: Array<{ title: string; description: string }>;
+  
+  // About Section
+  aboutTitle: string;
+  aboutDescription: string;
+  
+  // Approach Section
+  approachTitle: string;
+  approachSubtitle: string;
+  approachParagraphs: string[];
+  
+  // Contact Section
+  contactTitle: string;
+  contactEmail: string;
+  contactLinkedinUrl: string;
+}
+
+// Transform JSON structure to formData structure
+function transformContentToFormData(content: typeof defaultContent): FormData {
+  const formData: FormData = {
     // Hero Section
     heroTitle: content.hero.title,
     heroSubtitle: content.hero.subtitle,
     heroButton1: content.hero.button1,
     heroButton2: content.hero.button2,
     
-    // Capabilities Section
+    // Capabilities Section - now dynamic array
     capabilitiesSubtitle: content.capabilities.subtitle,
-    capability1Title: content.capabilities.items[0].title,
-    capability1Description: content.capabilities.items[0].description,
-    capability2Title: content.capabilities.items[1].title,
-    capability2Description: content.capabilities.items[1].description,
-    capability3Title: content.capabilities.items[2].title,
-    capability3Description: content.capabilities.items[2].description,
-    capability4Title: content.capabilities.items[3].title,
-    capability4Description: content.capabilities.items[3].description,
-    capability5Title: content.capabilities.items[4].title,
-    capability5Description: content.capabilities.items[4].description,
+    capabilities: content.capabilities.items.map(item => ({
+      title: item.title,
+      description: item.description,
+    })),
     
     // About Section
     aboutTitle: content.about.title,
@@ -32,19 +53,18 @@ function transformContentToFormData(content: typeof defaultContent) {
     // Approach Section
     approachTitle: content.approach.title,
     approachSubtitle: content.approach.subtitle,
-    approachParagraph1: content.approach.paragraphs[0],
-    approachParagraph2: content.approach.paragraphs[1],
-    approachParagraph3: content.approach.paragraphs[2],
-    approachParagraph4: content.approach.paragraphs[3],
+    approachParagraphs: [...content.approach.paragraphs],
     
     // Contact Section
     contactTitle: content.contact.title,
     contactEmail: content.contact.email,
+    contactLinkedinUrl: (content.contact as any).linkedinUrl || "",
   };
+  return formData;
 }
 
-// Transform flat formData structure back to JSON structure
-function transformFormDataToContent(formData: ReturnType<typeof transformContentToFormData>): typeof defaultContent {
+// Transform formData structure back to JSON structure
+function transformFormDataToContent(formData: FormData): typeof defaultContent {
   return {
     hero: {
       title: formData.heroTitle,
@@ -54,28 +74,10 @@ function transformFormDataToContent(formData: ReturnType<typeof transformContent
     },
     capabilities: {
       subtitle: formData.capabilitiesSubtitle,
-      items: [
-        {
-          title: formData.capability1Title,
-          description: formData.capability1Description,
-        },
-        {
-          title: formData.capability2Title,
-          description: formData.capability2Description,
-        },
-        {
-          title: formData.capability3Title,
-          description: formData.capability3Description,
-        },
-        {
-          title: formData.capability4Title,
-          description: formData.capability4Description,
-        },
-        {
-          title: formData.capability5Title,
-          description: formData.capability5Description,
-        },
-      ],
+      items: formData.capabilities.map(item => ({
+        title: item.title,
+        description: item.description,
+      })),
     },
     about: {
       title: formData.aboutTitle,
@@ -84,16 +86,12 @@ function transformFormDataToContent(formData: ReturnType<typeof transformContent
     approach: {
       title: formData.approachTitle,
       subtitle: formData.approachSubtitle,
-      paragraphs: [
-        formData.approachParagraph1,
-        formData.approachParagraph2,
-        formData.approachParagraph3,
-        formData.approachParagraph4,
-      ],
+      paragraphs: [...formData.approachParagraphs],
     },
     contact: {
       title: formData.contactTitle,
       email: formData.contactEmail,
+      linkedinUrl: formData.contactLinkedinUrl,
     },
   };
 }
@@ -131,6 +129,35 @@ function CMSDashboard({ onLogout }: { onLogout: () => void }) {
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleCapabilityChange = (index: number, field: "title" | "description", value: string) => {
+    setFormData((prev) => {
+      const updatedCapabilities = [...prev.capabilities];
+      updatedCapabilities[index] = {
+        ...updatedCapabilities[index],
+        [field]: value,
+      };
+      return { ...prev, capabilities: updatedCapabilities };
+    });
+  };
+
+  const handleAddCapability = () => {
+    setFormData((prev) => ({
+      ...prev,
+      capabilities: [...prev.capabilities, { title: "", description: "" }],
+    }));
+  };
+
+  const handleRemoveCapability = (index: number) => {
+    if (formData.capabilities.length <= 1) {
+      alert("You must have at least one capability.");
+      return;
+    }
+    setFormData((prev) => ({
+      ...prev,
+      capabilities: prev.capabilities.filter((_, i) => i !== index),
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -341,13 +368,31 @@ function CMSDashboard({ onLogout }: { onLogout: () => void }) {
                 </div>
 
                 <div className="space-y-6 pt-4 border-t border-gray-200">
-                  <h3 className="text-lg font-semibold text-gray-900">Capability Cards</h3>
+                  <div className="flex justify-between items-center">
+                    <h3 className="text-lg font-semibold text-gray-900">Capability Cards</h3>
+                    <button
+                      type="button"
+                      onClick={handleAddCapability}
+                      className="px-4 py-2 bg-[#2d5a5a] text-white text-sm font-medium rounded-md hover:bg-[#3d7a7a] transition-colors"
+                    >
+                      + Add Capability
+                    </button>
+                  </div>
                   
-                  {[1, 2, 3, 4, 5].map((num) => (
-                    <div key={num} className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                      <h4 className="text-md font-semibold text-[#2d5a5a] mb-4">
-                        Capability {num}
-                      </h4>
+                  {formData.capabilities.map((capability, index) => (
+                    <div key={index} className="bg-gray-50 p-6 rounded-lg border border-gray-200 relative">
+                      <div className="flex justify-between items-center mb-4">
+                        <h4 className="text-md font-semibold text-[#2d5a5a]">
+                          Capability {index + 1}
+                        </h4>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveCapability(index)}
+                          className="px-3 py-1 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700 transition-colors"
+                        >
+                          Remove
+                        </button>
+                      </div>
                       <div className="space-y-4">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -355,9 +400,10 @@ function CMSDashboard({ onLogout }: { onLogout: () => void }) {
                           </label>
                           <input
                             type="text"
-                            value={formData[`capability${num}Title` as keyof typeof formData] as string}
-                            onChange={(e) => handleInputChange(`capability${num}Title`, e.target.value)}
+                            value={capability.title}
+                            onChange={(e) => handleCapabilityChange(index, "title", e.target.value)}
                             className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#2d5a5a] focus:border-transparent"
+                            placeholder="Enter capability title"
                           />
                         </div>
                         <div>
@@ -366,9 +412,10 @@ function CMSDashboard({ onLogout }: { onLogout: () => void }) {
                           </label>
                           <textarea
                             rows={3}
-                            value={formData[`capability${num}Description` as keyof typeof formData] as string}
-                            onChange={(e) => handleInputChange(`capability${num}Description`, e.target.value)}
+                            value={capability.description}
+                            onChange={(e) => handleCapabilityChange(index, "description", e.target.value)}
                             className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#2d5a5a] focus:border-transparent resize-none"
+                            placeholder="Enter capability description"
                           />
                         </div>
                       </div>
@@ -445,15 +492,19 @@ function CMSDashboard({ onLogout }: { onLogout: () => void }) {
                 <div className="space-y-4 pt-4 border-t border-gray-200">
                   <h3 className="text-lg font-semibold text-gray-900">Content Paragraphs</h3>
                   
-                  {[1, 2, 3, 4].map((num) => (
-                    <div key={num}>
+                  {formData.approachParagraphs.map((paragraph, index) => (
+                    <div key={index}>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Paragraph {num}
+                        Paragraph {index + 1}
                       </label>
                       <textarea
                         rows={4}
-                        value={formData[`approachParagraph${num}` as keyof typeof formData] as string}
-                        onChange={(e) => handleInputChange(`approachParagraph${num}`, e.target.value)}
+                        value={paragraph}
+                        onChange={(e) => {
+                          const updatedParagraphs = [...formData.approachParagraphs];
+                          updatedParagraphs[index] = e.target.value;
+                          setFormData((prev) => ({ ...prev, approachParagraphs: updatedParagraphs }));
+                        }}
                         className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#2d5a5a] focus:border-transparent resize-none"
                       />
                     </div>
@@ -490,6 +541,20 @@ function CMSDashboard({ onLogout }: { onLogout: () => void }) {
                     value={formData.contactEmail}
                     onChange={(e) => handleInputChange("contactEmail", e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#2d5a5a] focus:border-transparent"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="contactLinkedinUrl" className="block text-sm font-medium text-gray-700 mb-2">
+                    LinkedIn URL
+                  </label>
+                  <input
+                    type="url"
+                    id="contactLinkedinUrl"
+                    value={formData.contactLinkedinUrl}
+                    onChange={(e) => handleInputChange("contactLinkedinUrl", e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#2d5a5a] focus:border-transparent"
+                    placeholder="https://linkedin.com/company/your-company"
                   />
                 </div>
               </div>

@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 
-export default function ContactForm() {
+interface ContactFormProps {
+  email: string;
+}
+
+export default function ContactForm({ email }: ContactFormProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -11,17 +15,6 @@ export default function ContactForm() {
     consent: false,
   });
   const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">("idle");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormStatus("idle");
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setFormStatus("success");
-      setFormData({ name: "", email: "", company: "", message: "", consent: false });
-    }, 500);
-  };
 
   return (
     <>
@@ -32,7 +25,7 @@ export default function ContactForm() {
           </p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+        <form action={`https://formsubmit.co/${email}`} method="POST">
           <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <label htmlFor="name" className="block text-base font-medium text-gray-700 mb-2">
@@ -41,6 +34,7 @@ export default function ContactForm() {
               <input
                 type="text"
                 id="name"
+                name="name"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -53,6 +47,7 @@ export default function ContactForm() {
               </label>
               <input
                 type="email"
+                name="email"
                 id="email"
                 required
                 value={formData.email}
@@ -67,6 +62,7 @@ export default function ContactForm() {
             </label>
             <input
               type="text"
+              name="company"
               id="company"
               required
               value={formData.company}
@@ -80,6 +76,7 @@ export default function ContactForm() {
             </label>
             <textarea
               id="message"
+              name="message"
               required
               rows={6}
               value={formData.message}
@@ -91,6 +88,7 @@ export default function ContactForm() {
             <input
               type="checkbox"
               id="consent"
+              name="consent"
               required
               checked={formData.consent}
               onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
@@ -106,8 +104,9 @@ export default function ContactForm() {
           >
             Send Message
           </button>
-        </form>
-      )}
+        </form >
+      )
+      }
     </>
   );
 }

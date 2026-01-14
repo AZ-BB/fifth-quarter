@@ -7,7 +7,17 @@ const scrollToSection = (id: string) => {
   }
 };
 
-export default function Footer() {
+interface Capability {
+  title: string;
+  description: string;
+}
+
+interface FooterProps {
+  capabilities: Capability[];
+  linkedinUrl?: string;
+}
+
+export default function Footer({ capabilities, linkedinUrl }: FooterProps) {
   return (
     <footer className="w-screen bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
@@ -52,16 +62,6 @@ export default function Footer() {
                   Contact
                 </button>
               </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-base">
-                  Case Studies
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-base">
-                  Resources
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -71,31 +71,16 @@ export default function Footer() {
               Services
             </h3>
             <ul className="space-y-3">
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-base">
-                  Customer Acquisition
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-base">
-                  Paid Media Strategy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-base">
-                  Performance Marketing
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-base">
-                  Brand Strategy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-base">
-                  Creative Direction
-                </a>
-              </li>
+              {capabilities.map((capability, index) => (
+                <li key={index}>
+                  <button
+                    onClick={() => scrollToSection("capabilities")}
+                    className="text-gray-400 hover:text-white transition-colors text-base text-left"
+                  >
+                    {capability.title}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -113,21 +98,18 @@ export default function Footer() {
                   fifthquartercards@gmail.com
                 </a>
               </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-base">
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-base">
-                  Twitter
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-base">
-                  Newsletter
-                </a>
-              </li>
+              {linkedinUrl && (
+                <li>
+                  <a 
+                    href={linkedinUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-white transition-colors text-base"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -139,12 +121,7 @@ export default function Footer() {
               © {new Date().getFullYear()} Fifth Quarter Cards, LLC. All rights reserved.
             </div>
             <div className="flex gap-6 text-base text-gray-400">
-              <a href="#" className="hover:text-white transition-colors">
-                Privacy Policy
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                Terms of Service
-              </a>
+
             </div>
           </div>
         </div>
