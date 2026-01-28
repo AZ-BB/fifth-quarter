@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
 const scrollToSection = (id: string) => {
   const element = document.getElementById(id);
@@ -55,9 +56,20 @@ export default function Navigation({ capabilities }: NavigationProps) {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-[#2d5a5a]/50">
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-24 py-4">
         <div className="flex items-center justify-between">
-          <div className="text-2xl sm:text-2xl lg:text-3xl font-playfairDisplay font-semibold text-[#2d5a5a]">
-            Fifth Quarter Cards
-          </div>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="cursor-pointer hover:opacity-80 transition-opacity"
+            aria-label="Go to top"
+          >
+            <Image
+              src="/FQC logo 1.png"
+              alt="Fifth Quarter Cards Consulting"
+              width={200}
+              height={80}
+              className="h-10 sm:h-12 lg:h-14 w-auto"
+              priority
+            />
+          </button>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8 font-semibold">
