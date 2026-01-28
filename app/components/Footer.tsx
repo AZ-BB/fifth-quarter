@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const scrollToSection = (id: string) => {
   const element = document.getElementById(id);
   if (element) {
@@ -24,9 +26,19 @@ export default function Footer({ capabilities, linkedinUrl }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 mb-8 sm:mb-12">
           {/* Brand Column */}
           <div className="space-y-4">
-            <div className="text-2xl sm:text-2xl font-semibold mb-4">
-              Fifth Quarter Cards
-            </div>
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="cursor-pointer hover:opacity-80 transition-opacity mb-4"
+              aria-label="Go to top"
+            >
+              <Image
+                src="/FQC logo 1.png"
+                alt="Fifth Quarter Cards Consulting"
+                width={200}
+                height={80}
+                className="h-12 sm:h-14 w-auto brightness-0 invert"
+              />
+            </button>
             <p className="text-gray-400 text-base leading-relaxed">
               Growth marketing partner combining brand thinking with customer acquisition and paid media execution.
             </p>
